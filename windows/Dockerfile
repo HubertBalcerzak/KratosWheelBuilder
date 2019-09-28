@@ -97,12 +97,13 @@ ENV BLAS c:\\libs\\libblas.lib
 ENV LAPACK c:\\libs\\liblapack.lib
 ENV PYTHON c:\\python
 
-COPY build.ps1 c:\\scripts\\build.ps1
-COPY configure.ps1 c:\\scripts\\configure.ps1
-COPY configure.bat c:\\scripts\\configure.bat
-COPY setup.py c:\\scripts\\setup.py
-COPY __init__.py c:\\scripts\\__init__.py
+#COPY build.ps1 c:\\scripts\\build.ps1
+#COPY configure.ps1 c:\\scripts\\configure.ps1
+#COPY configure.bat c:\\scripts\\configure.bat
+#COPY setup.py c:\\scripts\\setup.py
+#COPY __init__.py c:\\scripts\\__init__.py
+COPY start.ps1 c:\\scripts\\start.ps1
 
 # Default to PowerShell if no other command specified.
-CMD ["powershell.exe", "-NoLogo", "-ExecutionPolicy", "Bypass", "-Command", "c:\\scripts\\build.ps1"]
+ENTRYPOINT ["powershell.exe", "-NoLogo", "-ExecutionPolicy", "Bypass", "-Command", "c:\\scripts\\start.ps1"]
 
