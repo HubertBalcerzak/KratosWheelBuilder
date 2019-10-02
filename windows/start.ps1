@@ -1,5 +1,7 @@
 param([string]$branch="master")
 
+echo starting build for branch $branch
+
 #Load development env
 cmd.exe /c "call `"C:\Program Files (x86)\Microsoft Visual Studio\2019\BuildTools\VC\Auxiliary\Build\vcvars64.bat`" && set > %temp%\vcvars.txt"
 
