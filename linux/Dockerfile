@@ -1,6 +1,6 @@
 FROM quay.io/pypa/manylinux2010_x86_64
 
-RUN yum install -y git wget
+RUN yum install -y git wget zip
 
 RUN yum install -y libgfortran.x86_64 blas-devel lapack-devel
 
