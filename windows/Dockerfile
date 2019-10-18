@@ -95,7 +95,7 @@ ENV VCVARS  \"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\BuildTools
 ENV BOOST c:\\boost\\boost_1_69_0
 ENV BLAS c:\\libs\\libblas.lib
 ENV LAPACK c:\\libs\\liblapack.lib
-ENV PYTHON c:\\python
+ENV PYTHONROOT c:\\python
 
 #COPY build.ps1 c:\\scripts\\build.ps1
 #COPY configure.ps1 c:\\scripts\\configure.ps1
