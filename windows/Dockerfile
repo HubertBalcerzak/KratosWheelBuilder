@@ -80,13 +80,34 @@ RUN powershell.exe -Command \
 #Install python 3.7
 RUN powershell.exe -Command \
     [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; \
-    wget https://www.python.org/ftp/python/3.7.4/python-3.7.4-amd64.exe -OutFile c:\temp\python37.exe; \
+    wget https://www.python.org/ftp/python/3.7.5/python-3.7.5-amd64.exe -OutFile c:\temp\python37.exe; \
     mkdir c:\python\37; \
     Start-Process c:\temp\python37.exe -ArgumentList '/quiet InstallAllUsers=1 PrependPath=0 TargetDir=c:\\python\\37' -Wait; \
     c:\python\37\python.exe -m pip install --upgrade pip; \
     c:\python\37\python.exe -m pip install --upgrade setuptools wheel
 
+#Install python 3.8
+RUN powershell.exe -Command \
+    [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; \
+    wget https://www.python.org/ftp/python/3.8.0/python-3.8.0-amd64.exe -OutFile c:\temp\python38.exe; \
+    mkdir c:\python\38; \
+    Start-Process c:\temp\python38.exe -ArgumentList '/quiet InstallAllUsers=1 PrependPath=0 TargetDir=c:\\python\\38' -Wait; \
+    c:\python\38\python.exe -m pip install --upgrade pip; \
+    c:\python\38\python.exe -m pip install --upgrade setuptools wheel
 
+#Downloand blas/lapack
+RUN powershell.exe -Command \
+	[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; \
+	mkdir c:\libs; \
+	wget https://icl.cs.utk.edu/lapack-for-windows/libraries/VisualStudio/3.7.0/Dynamic-MINGW/Win64/libblas.lib -OutFile c:\libs\libblas.lib; \
+	wget https://icl.cs.utk.edu/lapack-for-windows/libraries/VisualStudio/3.7.0/Dynamic-MINGW/Win64/liblapack.lib -OutFile c:\libs\liblapack.lib
+
+#Download eigenlib
+RUN powershell.exe -Command \
+	[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; \
+	mkdir c:\eigen; \
+	wget https://gitlab.com/libeigen/eigen/-/archive/3.3.7/eigen-3.3.7.zip -OutFile c:\temp\eigen.zip; \
+	c:\7zip\7z.exe x c:\temp\eigen.zip -o"c:\eigen"
 
 #set env variables
 ENV CMAKE c:\\cmake\\cmake-3.14.1-win64-x64\\bin\\cmake.exe
@@ -96,6 +117,7 @@ ENV BOOST c:\\boost\\boost_1_69_0
 ENV BLAS c:\\libs\\libblas.lib
 ENV LAPACK c:\\libs\\liblapack.lib
 ENV PYTHONROOT c:\\python
+ENV EIGEN c:\\eigen\\eigen-3.3.7
 
 #COPY build.ps1 c:\\scripts\\build.ps1
 #COPY configure.ps1 c:\\scripts\\configure.ps1
