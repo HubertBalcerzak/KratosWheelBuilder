@@ -49,15 +49,6 @@ RUN powershell.exe -Command \
     mkdir c:\boost; \
     c:\7zip\7z.exe x c:\TEMP\boost.zip -o"c:\boost"
 
-
-# Install python 3.4, clcache
-#RUN powershell.exe -Command \
-#    [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; \
-#    wget https://www.python.org/ftp/python/3.4.4/python-3.4.4-amd64.exe -OutFile c:\temp\python34.exe; \
-#    mkdir c:\python; \
-#    mkdir c:\python\34; \
-#    Start-Process c:\temp\python34.exe -ArgumentList '/quiet InstallAllUsers=1 PrependPath=0 TargetDir=c:\\python\\34' -Wait
-
 #Install python 3.5
 RUN powershell.exe -Command \
     [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; \
@@ -80,7 +71,7 @@ RUN powershell.exe -Command \
 #Install python 3.7
 RUN powershell.exe -Command \
     [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; \
-    wget https://www.python.org/ftp/python/3.7.5/python-3.7.5-amd64.exe -OutFile c:\temp\python37.exe; \
+    wget https://www.python.org/ftp/python/3.7.7/python-3.7.7-amd64.exe -OutFile c:\temp\python37.exe; \
     mkdir c:\python\37; \
     Start-Process c:\temp\python37.exe -ArgumentList '/quiet InstallAllUsers=1 PrependPath=0 TargetDir=c:\\python\\37' -Wait; \
     c:\python\37\python.exe -m pip install --upgrade pip; \
@@ -89,7 +80,7 @@ RUN powershell.exe -Command \
 #Install python 3.8
 RUN powershell.exe -Command \
     [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; \
-    wget https://www.python.org/ftp/python/3.8.0/python-3.8.0-amd64.exe -OutFile c:\temp\python38.exe; \
+    wget https://www.python.org/ftp/python/3.8.2/python-3.8.2-amd64.exe -OutFile c:\temp\python38.exe; \
     mkdir c:\python\38; \
     Start-Process c:\temp\python38.exe -ArgumentList '/quiet InstallAllUsers=1 PrependPath=0 TargetDir=c:\\python\\38' -Wait; \
     c:\python\38\python.exe -m pip install --upgrade pip; \
@@ -119,11 +110,6 @@ ENV LAPACK c:\\libs\\liblapack.lib
 ENV PYTHONROOT c:\\python
 ENV EIGEN c:\\eigen\\eigen-3.3.7
 
-#COPY build.ps1 c:\\scripts\\build.ps1
-#COPY configure.ps1 c:\\scripts\\configure.ps1
-#COPY configure.bat c:\\scripts\\configure.bat
-#COPY setup.py c:\\scripts\\setup.py
-#COPY __init__.py c:\\scripts\\__init__.py
 COPY start.ps1 c:\\scripts\\start.ps1
 
 # Default to PowerShell if no other command specified.
